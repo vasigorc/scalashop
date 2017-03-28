@@ -43,8 +43,10 @@ object VerticalBoxBlur {
    *  bottom.
    */
   def blur(src: Img, dst: Img, from: Int, end: Int, radius: Int): Unit = {
-    // TODO implement this method using the `boxBlurKernel` method
-    ???
+    for {cols <- from until end
+        rows <- 0 until src.height
+        newValue = boxBlurKernel(src, cols, rows, radius)
+    } dst.update(cols,rows, newValue)
   }
 
   /** Blurs the columns of the source image in parallel using `numTasks` tasks.

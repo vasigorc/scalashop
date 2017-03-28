@@ -43,16 +43,18 @@ package object scalashop {
     var count = 0
 
     var minX = clamp(x-radius, 0, src.width-1)//to be incremented until max
-    var minY = clamp(y-radius, 0, src.height-1)//to be incremented until max
 
     while(minX <= clamp(x+radius, 0, src.width-1)) {
+
+      var minY = clamp(y-radius, 0, src.height-1)//to be incremented until max
       while(minY <= clamp(y+radius, 0, src.height-1)) {
         acc = acc.updated("r", acc("r")+red(src(minX, minY)))
         .updated("g", acc("g")+green(src(minX, minY)))
         .updated("b", acc("b")+blue(src(minX, minY)))
         .updated("a", acc("a")+alpha(src(minX, minY)))
-        count +=1
+
         minY += 1
+        count +=1
       }
       minX += 1
     }
